@@ -14,21 +14,21 @@ export const Hero: React.FC<HeroProps> = ({
   onOpenConsultation,
 }) => {
   return (
-    <section className="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24 border-b border-[#DCCBB8]/70 dark:border-[#3D2F2A] transition-colors duration-200">
+    <section className="relative overflow-hidden pt-6 pb-12 sm:pt-10 sm:pb-16 lg:pt-14 lg:pb-24 border-b border-[#DCCBB8]/70 dark:border-[#3D2F2A] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Main 2-Column Split matching the design layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+        {/* Main 2-Column Split */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 lg:gap-14 items-center">
           
           {/* Left Editorial Text Column with Staggered Entrance */}
-          <div className="lg:col-span-6 flex flex-col justify-center space-y-6 lg:space-y-8">
+          <div className="lg:col-span-6 flex flex-col justify-center space-y-5 sm:space-y-6 lg:space-y-8">
             
-            {/* Minimalist Sub-Header Kicker */}
+            {/* Minimalist Sub-Header Kicker (wraps cleanly on narrow mobile) */}
             <motion.div 
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="flex items-center gap-3 text-xs tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium"
+              className="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-[11px] sm:text-xs tracking-[0.2em] sm:tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium"
             >
               <span>Haute Parfumerie</span>
               <span aria-hidden="true" className="text-[#3E312D]/40 dark:text-[#F5EFEB]/30">·</span>
@@ -42,7 +42,7 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] font-normal tracking-tight text-[#3E312D] dark:text-[#F5EFEB] text-balance"
+              className="font-serif text-[2.35rem] sm:text-5xl lg:text-6xl xl:text-7xl leading-[1.08] font-normal tracking-tight text-[#3E312D] dark:text-[#F5EFEB] text-balance"
             >
               Fragrance that reveals your <span className="italic font-light text-[#B98F77] dark:text-[#D4A388]">nature</span>
             </motion.h1>
@@ -52,45 +52,46 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-              className="font-sans text-base sm:text-lg text-[#3E312D]/75 dark:text-[#C2B5AC] leading-relaxed max-w-xl font-light"
+              className="font-sans text-sm sm:text-base lg:text-lg text-[#3E312D]/75 dark:text-[#C2B5AC] leading-relaxed max-w-xl font-light"
             >
               Minimalist formulations of profound olfactory depth. Hand-blended using aged botanicals, rare Mysore sandalwood, and wild agarwood. Orders and direct payments arranged seamlessly via WhatsApp concierge.
             </motion.p>
 
-            {/* Action Buttons with subtle spring */}
+            {/* Action Buttons: Full-width stack on mobile, side-by-side on sm+ */}
             <motion.div 
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.45, ease: 'easeOut' }}
-              className="flex flex-wrap items-center gap-4 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-1"
             >
               <button
+                type="button"
                 onClick={onExploreClick}
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#2A211E] dark:hover:bg-[#E2DDD8] transition-all rounded text-xs font-medium tracking-[0.16em] uppercase cursor-pointer group shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3.5 bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#2A211E] dark:hover:bg-[#E2DDD8] transition-all rounded text-xs font-medium tracking-[0.16em] uppercase cursor-pointer group shadow-sm hover:shadow-md active:scale-[0.98] whitespace-nowrap"
               >
                 <span>Discover Collection</span>
                 <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </button>
 
               <button
+                type="button"
                 onClick={onOpenConsultation}
-                className="inline-flex items-center gap-2 px-6 py-3.5 bg-transparent border border-[#3E312D]/30 dark:border-[#F5EFEB]/30 text-[#3E312D] dark:text-[#F5EFEB] hover:border-[#3E312D] dark:hover:border-[#F5EFEB] hover:bg-[#DCCBB8]/20 dark:hover:bg-[#271E1B] transition-all rounded text-xs font-medium tracking-[0.16em] uppercase cursor-pointer hover:scale-[1.02] active:scale-[0.98]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-transparent border border-[#3E312D]/30 dark:border-[#F5EFEB]/30 text-[#3E312D] dark:text-[#F5EFEB] hover:border-[#3E312D] dark:hover:border-[#F5EFEB] hover:bg-[#DCCBB8]/20 dark:hover:bg-[#271E1B] transition-all rounded text-xs font-medium tracking-[0.16em] uppercase cursor-pointer active:scale-[0.98] whitespace-nowrap"
               >
                 <Sparkles className="w-3.5 h-3.5 text-[#B98F77] dark:text-[#D4A388]" />
                 <span>Scent Matcher</span>
               </button>
             </motion.div>
 
-            {/* Subtle note about WhatsApp concierge */}
-            <motion.div 
+            {/* Concierge note */}
+            <motion.p 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1, delay: 0.6 }}
-              className="pt-2 text-xs text-[#3E312D]/60 dark:text-[#C2B5AC]/70 flex items-center gap-2 font-sans"
+              className="pt-1 text-xs text-[#3E312D]/60 dark:text-[#C2B5AC]/70 font-sans"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B98F77] dark:bg-[#D4A388] animate-pulse" />
-              <span>Direct WhatsApp chat with our master nose for bespoke advice & orders</span>
-            </motion.div>
+              Direct WhatsApp chat with our master nose for bespoke advice &amp; orders
+            </motion.p>
 
           </div>
 
@@ -100,14 +101,14 @@ export const Hero: React.FC<HeroProps> = ({
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="relative mx-auto max-w-lg lg:max-w-none"
+              className="relative mx-auto max-w-md lg:max-w-none"
             >
               
-              {/* Soft decorative background glow pulsating in sync */}
+              {/* Soft decorative background glow */}
               <motion.div 
                 animate={{
-                  scale: [1, 1.05, 1],
-                  opacity: [0.25, 0.4, 0.25]
+                  scale: [1, 1.04, 1],
+                  opacity: [0.22, 0.35, 0.22]
                 }}
                 transition={{
                   duration: 8,
@@ -115,20 +116,20 @@ export const Hero: React.FC<HeroProps> = ({
                   ease: 'easeInOut'
                 }}
                 aria-hidden="true" 
-                className="absolute inset-0 bg-[#DCCBB8]/40 dark:bg-[#B98F77]/15 blur-2xl transform rotate-2 rounded-3xl"
+                className="absolute inset-0 bg-[#DCCBB8]/40 dark:bg-[#B98F77]/15 blur-2xl transform rotate-1 rounded-3xl"
               />
 
               {/* Card Container with Subtle Ambient Breathing Motion */}
               <motion.div 
                 animate={{
-                  y: [0, -6, 0]
+                  y: [0, -5, 0]
                 }}
                 transition={{
                   duration: 6,
                   repeat: Infinity,
                   ease: 'easeInOut'
                 }}
-                className="relative rounded-2xl overflow-hidden border border-[#DCCBB8]/80 dark:border-[#3D2F2A] bg-[#EFE9E1] dark:bg-[#1D1513] shadow-2xl group"
+                className="relative rounded-2xl overflow-hidden border border-[#DCCBB8]/80 dark:border-[#3D2F2A] bg-[#EFE9E1] dark:bg-[#1D1513] shadow-xl sm:shadow-2xl group"
               >
                 <img
                   src={STUDIO_IMAGES.heroPedestal}
@@ -137,8 +138,8 @@ export const Hero: React.FC<HeroProps> = ({
                   referrerPolicy="no-referrer"
                 />
                 
-                {/* Floating Subtle Label in bottom right corner */}
-                <div className="absolute bottom-4 right-4 bg-[#F7F3EF]/90 dark:bg-[#15100E]/90 backdrop-blur-md px-3.5 py-1.5 rounded border border-[#DCCBB8]/70 dark:border-[#3D2F2A] text-[11px] font-sans tracking-widest uppercase text-[#3E312D] dark:text-[#F5EFEB] flex items-center gap-2 shadow-sm">
+                {/* Subtle Batch Label */}
+                <div className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 bg-[#F7F3EF]/90 dark:bg-[#15100E]/90 backdrop-blur-md px-3 py-1 sm:px-3.5 sm:py-1.5 rounded border border-[#DCCBB8]/70 dark:border-[#3D2F2A] text-[10px] sm:text-[11px] font-sans tracking-widest uppercase text-[#3E312D] dark:text-[#F5EFEB] flex items-center gap-2 shadow-sm">
                   <span className="font-serif italic font-semibold">Mirex</span>
                   <span>· Batch No. 04</span>
                 </div>
@@ -149,15 +150,15 @@ export const Hero: React.FC<HeroProps> = ({
 
         </div>
 
-        {/* 3-Part Highlight Strip from the reference layout */}
-        <div className="mt-14 lg:mt-20 pt-8 border-t border-[#DCCBB8]/70 dark:border-[#3D2F2A]">
+        {/* 3-Part Highlight Strip */}
+        <div className="mt-10 sm:mt-14 lg:mt-20 pt-6 sm:pt-8 border-t border-[#DCCBB8]/70 dark:border-[#3D2F2A]">
           <div className="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-[#DCCBB8]/70 dark:divide-[#3D2F2A]">
             
             {/* Highlight 1 */}
             <motion.div 
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
-              className="py-4 md:py-0 md:px-6 flex items-start gap-3.5 first:pl-0"
+              className="py-4 md:py-0 md:px-6 flex items-start gap-3.5 md:first:pl-0"
             >
               <Droplets className="w-5 h-5 text-[#B98F77] dark:text-[#D4A388] shrink-0 mt-0.5" />
               <div>
@@ -165,7 +166,7 @@ export const Hero: React.FC<HeroProps> = ({
                   Clean Ingredients
                 </h2>
                 <p className="text-xs text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-0.5 leading-relaxed">
-                  30%+ pure essential oils & rare resins. Zero harsh petrochemicals or synthetic phthalates.
+                  30%+ pure essential oils &amp; rare resins. Zero harsh petrochemicals or synthetic phthalates.
                 </p>
               </div>
             </motion.div>
@@ -179,7 +180,7 @@ export const Hero: React.FC<HeroProps> = ({
               <Clock className="w-5 h-5 text-[#B98F77] dark:text-[#D4A388] shrink-0 mt-0.5" />
               <div>
                 <h2 className="text-xs tracking-[0.2em] uppercase font-sans font-semibold text-[#3E312D] dark:text-[#F5EFEB]">
-                  24h+ Longevity & Sillage
+                  24h+ Longevity &amp; Sillage
                 </h2>
                 <p className="text-xs text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-0.5 leading-relaxed">
                   Aged for 90 days in French glass carboys for profound skin intimacy and long-lasting projection.
@@ -191,12 +192,12 @@ export const Hero: React.FC<HeroProps> = ({
             <motion.div 
               whileHover={{ y: -2 }}
               transition={{ duration: 0.2 }}
-              className="py-4 md:py-0 md:px-6 flex items-start gap-3.5 last:pr-0"
+              className="py-4 md:py-0 md:px-6 flex items-start gap-3.5 md:last:pr-0"
             >
               <ShieldCheck className="w-5 h-5 text-[#B98F77] dark:text-[#D4A388] shrink-0 mt-0.5" />
               <div>
                 <h2 className="text-xs tracking-[0.2em] uppercase font-sans font-semibold text-[#3E312D] dark:text-[#F5EFEB]">
-                  WhatsApp Payment & Care
+                  WhatsApp Payment &amp; Care
                 </h2>
                 <p className="text-xs text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-0.5 leading-relaxed">
                   Instant concierge response. Secure bank transfer or card links with insured delivery.

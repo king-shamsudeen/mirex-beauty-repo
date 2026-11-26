@@ -6,13 +6,13 @@ import { ProductDetailModal } from './components/ProductDetailModal';
 import { WhatsAppDrawer } from './components/WhatsAppDrawer';
 import { WhatsAppPaymentGuide } from './components/WhatsAppPaymentGuide';
 import { ScentFinderModal } from './components/ScentFinderModal';
-import { SellerSettingsModal } from './components/SellerSettingsModal';
 import { AdminPortal } from './components/AdminPortal';
 import { MotionBackground } from './components/MotionBackground';
 import { FloatingWhatsApp } from './components/FloatingWhatsApp';
 import { Footer } from './components/Footer';
 import { PRODUCTS } from './data/products';
 import { STUDIO_IMAGES, resolveProductImage } from './data/images';
+import { ADMIN_HASH_ROUTE } from './utils/adminAuth';
 import { Product, CartItem, Currency } from './types';
 import { Sparkles, ArrowRight } from 'lucide-react';
 
@@ -101,8 +101,10 @@ export default function App() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isConsultationOpen, setIsConsultationOpen] = useState(false);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
-  const [isAdminOpen, setIsAdminOpen] = useState(false);
+  const [isAdminOpen, setIsAdminOpen] = useState<boolean>(() => {
+    return typeof window !== 'undefined' && window.location.hash === ADMIN_HASH_ROUTE;
+  });
+  const [whatsappVersion, setWhatsappVersion] = useState(0);
 
   // Search state
   const [searchQuery, setSearchQuery] = useState('');
@@ -118,6 +120,36 @@ export default function App() {
       console.error('Failed to save cart to localStorage', e);
     }
   }, [cartItems]);
+
+  // Listen for private Admin Portal hash route & Ctrl/Cmd+Shift+A shortcut
+  useEffect(() => {
+    const handleHashChange = () => {
+      if (window.location.hash === ADMIN_HASH_ROUTE) {
+        setIsAdminOpen(true);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'a') {
+        e.preventDefault();
+        setIsAdminOpen(true);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  const handleCloseAdmin = () => {
+    setIsAdminOpen(false);
+    if (window.location.hash === ADMIN_HASH_ROUTE) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+  };
 
   const showToast = (msg: string) => {
     setToastMessage(msg);
@@ -246,8 +278,6 @@ export default function App() {
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenConsultation={() => setIsConsultationOpen(true)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
-        onOpenAdmin={() => setIsAdminOpen(true)}
         onSearchClick={handleFocusSearch}
         isDark={isDark}
         onToggleTheme={toggleTheme}
@@ -274,29 +304,29 @@ export default function App() {
         />
 
         {/* Editorial Brand Narrative & Olfactory Philosophy */}
-        <section className="py-20 bg-[#FAF7F3] dark:bg-[#1A1311] border-t border-[#DCCBB8]/70 dark:border-[#3D2F2A] transition-colors duration-200">
+        <section id="story" className="py-14 sm:py-20 bg-[#FAF7F3] dark:bg-[#1A1311] border-t border-[#DCCBB8]/70 dark:border-[#3D2F2A] transition-colors duration-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-12 items-center">
               
-              <div className="lg:col-span-6 space-y-6">
-                <div className="text-xs tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium">
+              <div className="lg:col-span-6 space-y-5 sm:space-y-6">
+                <div className="text-[11px] sm:text-xs tracking-[0.24em] sm:tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium">
                   The Mirex Difference
                 </div>
                 <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#3E312D] dark:text-[#F5EFEB] leading-tight">
                   Hand-Poured in Small Batches. Matured for 90 Days.
                 </h2>
-                <p className="text-sm text-[#3E312D]/80 dark:text-[#C2B5AC] font-sans leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#3E312D]/80 dark:text-[#C2B5AC] font-sans leading-relaxed">
                   While mass-market perfumes rely on synthetic aroma-chemicals and high water dilution, every flacon of MIREX SCENT is created with a minimum of 30% pure perfume oil concentration. We let our pure botanical oils macerate over months, allowing the woods, ambers, and florals to harmonize naturally on the skin.
                 </p>
 
-                <div className="grid grid-cols-2 gap-6 pt-3 text-xs font-sans">
-                  <div className="border-l border-[#B98F77] dark:border-[#D4A388] pl-4 space-y-1">
-                    <span className="font-serif text-2xl text-[#3E312D] dark:text-[#F5EFEB] block">30% - 35%</span>
-                    <span className="text-[#3E312D]/70 dark:text-[#C2B5AC] uppercase tracking-wider text-[11px]">Extrait de Parfum Oil</span>
+                <div className="grid grid-cols-2 gap-4 sm:gap-6 pt-2 text-xs font-sans">
+                  <div className="border-t border-[#DCCBB8] dark:border-[#3D2F2A] pt-3 space-y-1">
+                    <span className="font-serif text-xl sm:text-2xl text-[#3E312D] dark:text-[#F5EFEB] block tabular-nums">30% - 35%</span>
+                    <span className="text-[#3E312D]/70 dark:text-[#C2B5AC] uppercase tracking-wider text-[10px] sm:text-[11px]">Extrait de Parfum Oil</span>
                   </div>
-                  <div className="border-l border-[#B98F77] dark:border-[#D4A388] pl-4 space-y-1">
-                    <span className="font-serif text-2xl text-[#3E312D] dark:text-[#F5EFEB] block">90 Days</span>
-                    <span className="text-[#3E312D]/70 dark:text-[#C2B5AC] uppercase tracking-wider text-[11px]">Artisanal Maceration</span>
+                  <div className="border-t border-[#DCCBB8] dark:border-[#3D2F2A] pt-3 space-y-1">
+                    <span className="font-serif text-xl sm:text-2xl text-[#3E312D] dark:text-[#F5EFEB] block tabular-nums">90 Days</span>
+                    <span className="text-[#3E312D]/70 dark:text-[#C2B5AC] uppercase tracking-wider text-[10px] sm:text-[11px]">Artisanal Maceration</span>
                   </div>
                 </div>
 
@@ -334,13 +364,13 @@ export default function App() {
 
       {/* Footer */}
       <Footer
+        key={`footer-${whatsappVersion}`}
         onOpenConsultation={() => setIsConsultationOpen(true)}
-        onOpenSettings={() => setIsSettingsOpen(true)}
         onOpenAdmin={() => setIsAdminOpen(true)}
       />
 
       {/* Floating WhatsApp Concierge Button */}
-      <FloatingWhatsApp />
+      <FloatingWhatsApp key={`wa-${whatsappVersion}`} />
 
       {/* Modals & Drawers */}
       <ProductDetailModal
@@ -369,21 +399,19 @@ export default function App() {
         onSelectProduct={(p) => setSelectedProduct(p)}
       />
 
-      <SellerSettingsModal
-        isOpen={isSettingsOpen}
-        onClose={() => setIsSettingsOpen(false)}
-        onSaved={() => showToast('WhatsApp Concierge Number Updated')}
-      />
-
       {/* Admin Portal Modal */}
       <AdminPortal
         isOpen={isAdminOpen}
-        onClose={() => setIsAdminOpen(false)}
+        onClose={handleCloseAdmin}
         products={products}
         currency={currency}
         onSaveProduct={handleSaveProduct}
         onDeleteProduct={handleDeleteProduct}
         onResetToDefaults={handleResetToDefaults}
+        onWhatsAppUpdated={() => {
+          setWhatsappVersion((v) => v + 1);
+          showToast('WhatsApp Concierge Number Updated');
+        }}
       />
 
     </div>

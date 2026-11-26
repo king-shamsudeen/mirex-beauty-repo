@@ -65,8 +65,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </span>
         </div>
 
-        {/* Quick View Button on Hover */}
-        <div className="absolute inset-0 bg-[#3E312D]/30 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+        {/* Quick View Button on Hover (desktop) */}
+        <div className="hidden sm:flex absolute inset-0 bg-[#3E312D]/30 dark:bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity items-center justify-center pointer-events-none">
           <motion.span 
             initial={{ scale: 0.9, opacity: 0 }}
             whileHover={{ scale: 1.05 }}
@@ -77,7 +77,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           </motion.span>
         </div>
 
-        {/* Concentration pill in bottom right */}
+        {/* Concentration tag in bottom right */}
         <div className="absolute bottom-3 right-3">
           <span className="text-[10px] font-sans tracking-widest uppercase bg-[#3E312D]/80 dark:bg-[#15100E]/80 backdrop-blur-sm text-[#F7F3EF] dark:text-[#EFE8DF] px-2 py-0.5 rounded">
             Extrait 30%
@@ -86,17 +86,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       </div>
 
       {/* Card Body */}
-      <div className="p-5 sm:p-6 flex flex-col flex-1 justify-between space-y-4">
+      <div className="p-4 sm:p-6 flex flex-col flex-1 justify-between space-y-4">
         
         {/* Unboxed Metadata & Title */}
         <div className="space-y-1.5">
-          <div className="flex items-center gap-2 text-xs text-[#B98F77] dark:text-[#D4A388] font-sans tracking-[0.2em] uppercase font-medium">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] sm:text-xs text-[#B98F77] dark:text-[#D4A388] font-sans tracking-[0.16em] sm:tracking-[0.2em] uppercase font-medium">
             <span>{product.family}</span>
             <span aria-hidden="true" className="text-[#3E312D]/30 dark:text-[#F5EFEB]/30">·</span>
             <span>{product.concentration.split('(')[0].trim()}</span>
           </div>
 
-          <h3 className="font-serif text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB] group-hover:text-[#B98F77] dark:group-hover:text-[#D4A388] transition-colors leading-tight">
+          <h3 className="font-serif text-xl sm:text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB] group-hover:text-[#B98F77] dark:group-hover:text-[#D4A388] transition-colors leading-tight">
             {product.name}
           </h3>
 
@@ -131,7 +131,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
                   e.stopPropagation();
                   setSelectedVolume(v.volume);
                 }}
-                className={`flex-1 py-1 px-2 text-xs font-sans tracking-wide rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                className={`flex-1 py-2 sm:py-1.5 px-1.5 sm:px-2 text-[11px] sm:text-xs font-sans tracking-wide rounded-md transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                   selectedVolume === v.volume
                     ? 'bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] font-medium shadow-xs'
                     : 'text-[#3E312D]/80 dark:text-[#C2B5AC] hover:text-[#3E312D] dark:hover:text-[#F5EFEB] hover:bg-[#DCCBB8]/40 dark:hover:bg-[#3D2F2A]'
@@ -144,17 +144,17 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         </div>
 
         {/* Price & Primary WhatsApp Order Action */}
-        <div className="pt-2 border-t border-[#DCCBB8]/50 dark:border-[#3D2F2A] flex items-center justify-between gap-3">
-          <div>
+        <div className="pt-2.5 border-t border-[#DCCBB8]/50 dark:border-[#3D2F2A] flex flex-wrap items-center justify-between gap-2.5">
+          <div className="min-w-0">
             <span className="text-[10px] tracking-wider uppercase text-[#3E312D]/50 dark:text-[#C2B5AC]/60 block font-sans">
               Price
             </span>
-            <span className="font-serif text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB] tabular-nums">
+            <span className="font-serif text-xl sm:text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB] tabular-nums">
               {formatPrice(currentPrice, currency)}
             </span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {/* Quick Add to Inquiry Bag */}
             <motion.button
               whileTap={{ scale: 0.92 }}
@@ -162,7 +162,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               onClick={handleQuickAdd}
               aria-label="Add to Inquiry Bag"
               title="Add to Inquiry Bag"
-              className="p-2.5 rounded border border-[#3E312D]/20 dark:border-[#F5EFEB]/20 text-[#3E312D] dark:text-[#F5EFEB] hover:border-[#3E312D] dark:hover:border-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] transition-colors cursor-pointer"
+              className="p-2.5 min-w-[40px] min-h-[40px] flex items-center justify-center rounded border border-[#3E312D]/20 dark:border-[#F5EFEB]/20 text-[#3E312D] dark:text-[#F5EFEB] hover:border-[#3E312D] dark:hover:border-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] transition-colors cursor-pointer"
             >
               {addedFeedback ? (
                 <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
@@ -176,10 +176,10 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               whileTap={{ scale: 0.96 }}
               type="button"
               onClick={handleWhatsAppOrder}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#281F1D] dark:hover:bg-[#E2DDD8] rounded text-xs tracking-wider uppercase font-medium transition-colors cursor-pointer shadow-xs whitespace-nowrap shrink-0 group/btn"
+              className="flex items-center gap-1.5 px-3 sm:px-3.5 py-2.5 min-h-[40px] bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#281F1D] dark:hover:bg-[#E2DDD8] rounded text-xs tracking-wider uppercase font-medium transition-colors cursor-pointer shadow-xs whitespace-nowrap shrink-0 group/btn"
             >
               <MessageCircle className="w-3.5 h-3.5 text-[#B98F77] dark:text-[#C8977D] transition-transform group-hover/btn:scale-110" />
-              <span>Inquire & Pay</span>
+              <span>Inquire &amp; Pay</span>
             </motion.button>
           </div>
         </div>

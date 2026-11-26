@@ -58,12 +58,12 @@ export const ScentFinderModal: React.FC<ScentFinderModalProps> = ({
 
   return (
     <div 
-      className="fixed inset-0 z-50 overflow-y-auto bg-[#15100E]/70 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6"
+      className="fixed inset-0 z-50 overflow-y-auto bg-[#15100E]/70 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
       role="dialog"
       aria-modal="true"
     >
       <div 
-        className="relative bg-[#FAF7F3] dark:bg-[#1D1513] rounded-2xl max-w-xl w-full border border-[#DCCBB8] dark:border-[#3D2F2A] shadow-2xl p-6 sm:p-8 overflow-hidden transition-colors duration-200"
+        className="relative bg-[#FAF7F3] dark:bg-[#1D1513] rounded-2xl max-w-xl w-full border border-[#DCCBB8] dark:border-[#3D2F2A] shadow-2xl p-5 sm:p-8 max-h-[92vh] overflow-y-auto transition-colors duration-200"
       >
         {/* Top Close Button */}
         <button
@@ -239,11 +239,11 @@ export const ScentFinderModal: React.FC<ScentFinderModalProps> = ({
             </div>
 
             {/* Product Card Showcase */}
-            <div className="p-4 bg-white dark:bg-[#251D1A] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded-xl flex items-center gap-4 text-left">
+            <div className="p-3.5 sm:p-4 bg-white dark:bg-[#251D1A] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded-xl flex flex-col xs:flex-row sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 text-left">
               <img
                 src={recommendedProduct.image}
                 alt={recommendedProduct.name}
-                className="w-24 h-24 object-cover rounded-lg bg-[#EFE8DF] dark:bg-[#1D1513] shrink-0"
+                className="w-full h-40 sm:w-24 sm:h-24 object-cover rounded-lg bg-[#EFE8DF] dark:bg-[#1D1513] shrink-0"
                 referrerPolicy="no-referrer"
               />
               <div className="flex-1 min-w-0">

@@ -67,12 +67,12 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
         className="relative w-full max-w-xl bg-[#FAF7F3] dark:bg-[#1D1513] h-full shadow-2xl flex flex-col border-l border-[#DCCBB8] dark:border-[#3D2F2A] overflow-hidden transition-colors duration-200"
       >
         {/* Drawer Header */}
-        <div className="p-6 border-b border-[#DCCBB8] dark:border-[#3D2F2A] flex items-center justify-between bg-[#F7F3EF] dark:bg-[#15100E]">
+        <div className="p-4 sm:p-6 border-b border-[#DCCBB8] dark:border-[#3D2F2A] flex items-center justify-between bg-[#F7F3EF] dark:bg-[#15100E]">
           <div>
             <span className="text-[10px] tracking-[0.24em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-semibold block">
               Mirex Concierge
             </span>
-            <h2 className="font-serif text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB]">
+            <h2 className="font-serif text-xl sm:text-2xl font-normal text-[#3E312D] dark:text-[#F5EFEB]">
               WhatsApp Inquiry Bag
             </h2>
           </div>
@@ -80,6 +80,7 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
           <div className="flex items-center gap-2">
             {cartItems.length > 0 && (
               <button
+                type="button"
                 onClick={onClearCart}
                 className="text-xs text-[#3E312D]/60 dark:text-[#C2B5AC]/70 hover:text-red-600 dark:hover:text-red-400 underline font-sans mr-2 cursor-pointer"
               >
@@ -87,6 +88,7 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
               </button>
             )}
             <button
+              type="button"
               onClick={onClose}
               aria-label="Close bag"
               className="p-2 rounded-full hover:bg-[#DCCBB8]/50 dark:hover:bg-[#271E1B] text-[#3E312D] dark:text-[#F5EFEB] transition-colors cursor-pointer"
@@ -97,7 +99,7 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
         </div>
 
         {/* Drawer Scrollable Content */}
-        <div className="flex-1 overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
           
           {/* Empty State */}
           {cartItems.length === 0 ? (
@@ -133,63 +135,66 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
                     const itemTotal = item.unitPrice * item.quantity;
 
                     return (
-                      <div key={`${item.productId}-${item.volume}`} className="p-4 flex items-center gap-4">
-                        {/* Thumbnail */}
-                        <img
-                          src={prod.image}
-                          alt={prod.name}
-                          className="w-16 h-16 object-cover rounded-md bg-[#EFE8DF] dark:bg-[#1D1513] border border-[#DCCBB8]/50 dark:border-[#3D2F2A]"
-                          referrerPolicy="no-referrer"
-                        />
+                      <div key={`${item.productId}-${item.volume}`} className="p-3.5 sm:p-4 flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 sm:gap-4">
+                        {/* Left group: Thumbnail + Title */}
+                        <div className="flex items-center gap-3 min-w-0 flex-1">
+                          <img
+                            src={prod.image}
+                            alt={prod.name}
+                            className="w-14 h-14 sm:w-16 sm:h-16 object-cover rounded-md bg-[#EFE8DF] dark:bg-[#1D1513] border border-[#DCCBB8]/50 dark:border-[#3D2F2A] shrink-0"
+                            referrerPolicy="no-referrer"
+                          />
 
-                        {/* Title & Volume */}
-                        <div className="flex-1 min-w-0">
-                          <h4 className="font-serif text-lg text-[#3E312D] dark:text-[#F5EFEB] truncate">
-                            {prod.name}
-                          </h4>
-                          <div className="flex items-center gap-2 text-xs text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-0.5">
-                            <span className="font-medium text-[#B98F77] dark:text-[#D4A388]">{item.volume}</span>
-                            <span>·</span>
-                            <span className="tabular-nums">{formatPrice(item.unitPrice, currency)} each</span>
+                          {/* Title & Volume */}
+                          <div className="flex-1 min-w-0">
+                            <h4 className="font-serif text-base sm:text-lg text-[#3E312D] dark:text-[#F5EFEB] truncate">
+                              {prod.name}
+                            </h4>
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-0.5">
+                              <span className="font-medium text-[#B98F77] dark:text-[#D4A388]">{item.volume}</span>
+                              <span>·</span>
+                              <span className="tabular-nums">{formatPrice(item.unitPrice, currency)}</span>
+                            </div>
                           </div>
                         </div>
 
-                        {/* Stepper */}
-                        <div className="flex items-center border border-[#DCCBB8] dark:border-[#3D2F2A] rounded bg-[#FAF7F3] dark:bg-[#1D1513]">
-                          <button
-                            type="button"
-                            onClick={() => onUpdateQuantity(item.productId, item.volume, -1)}
-                            className="p-1.5 text-[#3E312D]/70 dark:text-[#C2B5AC] hover:text-[#3E312D] dark:hover:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] cursor-pointer"
-                            aria-label="Decrease quantity"
-                          >
-                            <Minus className="w-3 h-3" />
-                          </button>
-                          <span className="px-2 text-xs font-semibold tabular-nums text-[#3E312D] dark:text-[#F5EFEB]">
-                            {item.quantity}
-                          </span>
-                          <button
-                            type="button"
-                            onClick={() => onUpdateQuantity(item.productId, item.volume, 1)}
-                            className="p-1.5 text-[#3E312D]/70 dark:text-[#C2B5AC] hover:text-[#3E312D] dark:hover:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] cursor-pointer"
-                            aria-label="Increase quantity"
-                          >
-                            <Plus className="w-3 h-3" />
-                          </button>
-                        </div>
-
-                        {/* Subtotal */}
-                        <div className="text-right">
-                          <div className="font-serif text-base text-[#3E312D] dark:text-[#F5EFEB] font-medium tabular-nums">
-                            {formatPrice(itemTotal, currency)}
+                        {/* Right group: Stepper + Subtotal */}
+                        <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto pt-2 sm:pt-0 border-t sm:border-t-0 border-[#DCCBB8]/30 dark:border-[#3D2F2A]/50">
+                          <div className="flex items-center border border-[#DCCBB8] dark:border-[#3D2F2A] rounded bg-[#FAF7F3] dark:bg-[#1D1513]">
+                            <button
+                              type="button"
+                              onClick={() => onUpdateQuantity(item.productId, item.volume, -1)}
+                              className="p-2 sm:p-1.5 text-[#3E312D]/70 dark:text-[#C2B5AC] hover:text-[#3E312D] dark:hover:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] cursor-pointer"
+                              aria-label="Decrease quantity"
+                            >
+                              <Minus className="w-3 h-3" />
+                            </button>
+                            <span className="px-2.5 text-xs font-semibold tabular-nums text-[#3E312D] dark:text-[#F5EFEB]">
+                              {item.quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => onUpdateQuantity(item.productId, item.volume, 1)}
+                              className="p-2 sm:p-1.5 text-[#3E312D]/70 dark:text-[#C2B5AC] hover:text-[#3E312D] dark:hover:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] cursor-pointer"
+                              aria-label="Increase quantity"
+                            >
+                              <Plus className="w-3 h-3" />
+                            </button>
                           </div>
-                          <button
-                            type="button"
-                            onClick={() => onRemoveItem(item.productId, item.volume)}
-                            className="text-[11px] text-red-600 dark:text-red-400 hover:text-red-800 font-sans mt-1 cursor-pointer flex items-center gap-1 justify-end"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                            <span>Remove</span>
-                          </button>
+
+                          <div className="text-right">
+                            <div className="font-serif text-base text-[#3E312D] dark:text-[#F5EFEB] font-medium tabular-nums">
+                              {formatPrice(itemTotal, currency)}
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => onRemoveItem(item.productId, item.volume)}
+                              className="text-[11px] text-red-600 dark:text-red-400 hover:text-red-800 font-sans mt-0.5 cursor-pointer flex items-center gap-1 justify-end ml-auto"
+                            >
+                              <Trash2 className="w-3 h-3" />
+                              <span>Remove</span>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     );
@@ -313,9 +318,9 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
 
         {/* Drawer Footer with Total & Direct WhatsApp CTA */}
         {cartItems.length > 0 && (
-          <div className="p-6 border-t border-[#DCCBB8] dark:border-[#3D2F2A] bg-[#F7F3EF] dark:bg-[#15100E] space-y-4">
+          <div className="p-4 sm:p-6 border-t border-[#DCCBB8] dark:border-[#3D2F2A] bg-[#F7F3EF] dark:bg-[#15100E] space-y-3 sm:space-y-4">
             
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between gap-2">
               <div>
                 <span className="text-[10px] tracking-widest uppercase text-[#3E312D]/60 dark:text-[#C2B5AC]/70 block font-sans">
                   Total Investment
@@ -324,18 +329,18 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
                   Free Insured Shipping Included
                 </span>
               </div>
-              <div className="font-serif text-3xl font-normal text-[#3E312D] dark:text-[#F5EFEB] tabular-nums">
+              <div className="font-serif text-2xl sm:text-3xl font-normal text-[#3E312D] dark:text-[#F5EFEB] tabular-nums">
                 {formattedTotal}
               </div>
             </div>
 
             {/* Main Action Buttons */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               <button
                 type="button"
                 onClick={handleCopy}
                 title="Copy formatted text to clipboard"
-                className="px-3.5 py-3 border border-[#DCCBB8] dark:border-[#3D2F2A] text-[#3E312D] dark:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] rounded text-xs font-sans uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="px-3.5 py-3 border border-[#DCCBB8] dark:border-[#3D2F2A] text-[#3E312D] dark:text-[#F5EFEB] hover:bg-[#DCCBB8]/30 dark:hover:bg-[#271E1B] rounded text-xs font-sans uppercase tracking-wider transition-colors flex items-center justify-center gap-1.5 cursor-pointer shrink-0"
               >
                 {copied ? <Check className="w-4 h-4 text-emerald-600 dark:text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 <span className="hidden sm:inline">{copied ? 'Copied' : 'Copy'}</span>
@@ -344,11 +349,11 @@ export const WhatsAppDrawer: React.FC<WhatsAppDrawerProps> = ({
               <button
                 type="button"
                 onClick={handleLaunchWhatsApp}
-                className="flex-1 py-3.5 px-6 bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#281F1D] dark:hover:bg-[#E2DDD8] rounded text-xs font-sans uppercase tracking-[0.16em] font-semibold transition-all flex items-center justify-center gap-2.5 cursor-pointer shadow-md hover:shadow-lg group"
+                className="flex-1 py-3 sm:py-3.5 px-4 sm:px-6 bg-[#3E312D] dark:bg-[#F5EFEB] text-[#F7F3EF] dark:text-[#15100E] hover:bg-[#281F1D] dark:hover:bg-[#E2DDD8] rounded text-xs font-sans uppercase tracking-[0.12em] sm:tracking-[0.16em] font-semibold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md hover:shadow-lg group"
               >
-                <MessageCircle className="w-4 h-4 text-[#B98F77] dark:text-[#C8977D] transition-transform group-hover:scale-110" />
-                <span>Complete Order on WhatsApp</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                <MessageCircle className="w-4 h-4 text-[#B98F77] dark:text-[#C8977D] shrink-0 transition-transform group-hover:scale-110" />
+                <span className="truncate">Complete Order on WhatsApp</span>
+                <ArrowRight className="w-4 h-4 shrink-0 transition-transform group-hover:translate-x-1" />
               </button>
             </div>
 

@@ -41,7 +41,7 @@ export const MotionBackground: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-[#DCCBB8]/30 dark:bg-[#B98F77]/10 blur-3xl"
+        className="absolute -top-24 -left-24 sm:-top-32 sm:-left-32 w-64 h-64 sm:w-96 sm:h-96 rounded-full bg-[#DCCBB8]/30 dark:bg-[#B98F77]/10 blur-3xl"
       />
 
       <motion.div
@@ -56,7 +56,7 @@ export const MotionBackground: React.FC = () => {
           repeat: Infinity,
           ease: 'easeInOut',
         }}
-        className="absolute top-1/2 -right-32 w-[500px] h-[500px] rounded-full bg-[#B98F77]/20 dark:bg-[#D4A388]/10 blur-3xl"
+        className="absolute top-1/2 -right-24 sm:-right-32 w-72 h-72 sm:w-[500px] sm:h-[500px] rounded-full bg-[#B98F77]/20 dark:bg-[#D4A388]/10 blur-3xl"
       />
 
       {/* Floating Golden Scent Mist Particles */}

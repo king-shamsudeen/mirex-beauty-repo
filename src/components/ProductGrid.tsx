@@ -61,24 +61,24 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
   }, [products, selectedFamily, searchQuery, sortBy]);
 
   return (
-    <section id="collection" className="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-colors duration-200">
+    <section id="collection" className="py-12 sm:py-20 lg:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-colors duration-200">
       
       {/* Section Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-10 border-b border-[#DCCBB8]/70 dark:border-[#3D2F2A]">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-5 sm:gap-6 pb-8 sm:pb-10 border-b border-[#DCCBB8]/70 dark:border-[#3D2F2A]">
         <div>
-          <div className="text-xs tracking-[0.26em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium mb-2">
+          <div className="text-[11px] sm:text-xs tracking-[0.22em] sm:tracking-[0.26em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium mb-2">
             Haute Parfumerie Flacons
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#3E312D] dark:text-[#F5EFEB]">
             Available Extrait Editions
           </h2>
-          <p className="text-sm text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-2 max-w-lg">
+          <p className="text-xs sm:text-sm text-[#3E312D]/70 dark:text-[#C2B5AC] font-sans mt-2 max-w-lg leading-relaxed">
             Each formula is crafted in limited numbered batches. Select your flacon and inquire directly via WhatsApp concierge for prompt verification and payment details.
           </p>
         </div>
 
         {/* Sort & Quick Filter Options */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between sm:justify-start gap-3">
           <label htmlFor="sort-select" className="text-xs uppercase tracking-wider text-[#3E312D]/60 dark:text-[#C2B5AC]/70 font-sans whitespace-nowrap">
             Sort By
           </label>
@@ -86,7 +86,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
             id="sort-select"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value as any)}
-            className="bg-[#FAF7F3] dark:bg-[#1D1513] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded px-3 py-1.5 text-xs text-[#3E312D] dark:text-[#F5EFEB] font-sans cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#B98F77]"
+            className="bg-[#FAF7F3] dark:bg-[#1D1513] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded px-3 py-2 text-xs text-[#3E312D] dark:text-[#F5EFEB] font-sans cursor-pointer focus:outline-none focus:ring-1 focus:ring-[#B98F77]"
           >
             <option value="featured" className="bg-[#FAF7F3] dark:bg-[#1D1513]">Featured Curations</option>
             <option value="price-asc" className="bg-[#FAF7F3] dark:bg-[#1D1513]">Price: Low to High</option>
@@ -96,10 +96,10 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
       </div>
 
       {/* Filter Tabs & Search Bar */}
-      <div className="py-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+      <div className="py-5 sm:py-6 flex flex-col lg:flex-row lg:items-center justify-between gap-4">
         
         {/* Interactive Segmented Filter Controls */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+        <div className="flex items-center gap-1.5 overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0 pb-1 lg:pb-0">
           {SCENT_FAMILIES.map((family) => {
             const count = family === 'All' 
               ? products.length 
@@ -174,7 +174,7 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
       {filteredProducts.length > 0 ? (
         <motion.div 
           layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((product) => (

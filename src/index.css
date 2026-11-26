@@ -14,15 +14,19 @@
   --color-noir-border: #3D2F2A;
 }
 
-html {
+html,
+body {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
   background-color: #F7F3EF;
   color: #3E312D;
   transition: background-color 0.25s ease, color 0.25s ease;
+  overflow-x: clip;
+  max-width: 100%;
 }
 
-html.dark {
+html.dark,
+html.dark body {
   background-color: #140E0C;
   color: #F4EFEB;
 }

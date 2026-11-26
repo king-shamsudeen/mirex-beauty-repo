@@ -27,27 +27,27 @@ const REVIEWS = [
 
 export const WhatsAppPaymentGuide: React.FC = () => {
   return (
-    <section id="how-it-works" className="py-20 bg-[#EFE8DF]/60 dark:bg-[#18110F] border-t border-b border-[#DCCBB8] dark:border-[#3D2F2A] transition-colors duration-200">
+    <section id="how-it-works" className="py-14 sm:py-20 bg-[#EFE8DF]/60 dark:bg-[#18110F] border-t border-b border-[#DCCBB8] dark:border-[#3D2F2A] transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="text-xs tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium mb-2">
+        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-16">
+          <div className="text-[11px] sm:text-xs tracking-[0.22em] sm:tracking-[0.28em] uppercase text-[#B98F77] dark:text-[#D4A388] font-sans font-medium mb-2">
             The Bespoke Experience
           </div>
           <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-normal text-[#3E312D] dark:text-[#F5EFEB]">
-            How WhatsApp Ordering & Payment Works
+            How WhatsApp Ordering &amp; Payment Works
           </h2>
-          <p className="text-sm text-[#3E312D]/75 dark:text-[#C2B5AC] font-sans mt-3 leading-relaxed">
+          <p className="text-xs sm:text-sm text-[#3E312D]/75 dark:text-[#C2B5AC] font-sans mt-3 leading-relaxed">
             We provide a dedicated private concierge service. No anonymous checkout lines or robotic bots—you converse directly with a Mirex fragrance specialist.
           </p>
         </div>
 
         {/* 4-Step Process Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-8">
           
           {/* Step 1 */}
-          <div className="bg-[#FAF7F3] dark:bg-[#1D1513] p-7 rounded-xl border border-[#DCCBB8] dark:border-[#3D2F2A] shadow-xs relative">
+          <div className="bg-[#FAF7F3] dark:bg-[#1D1513] p-5 sm:p-7 rounded-xl border border-[#DCCBB8] dark:border-[#3D2F2A] shadow-xs relative">
             <span className="font-serif text-4xl text-[#B98F77]/30 dark:text-[#D4A388]/30 absolute top-4 right-4 font-light">
               01
             </span>
@@ -140,7 +140,7 @@ export const WhatsAppPaymentGuide: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-[#DCCBB8]/50 dark:border-[#3D2F2A] flex items-center justify-between text-xs font-sans">
+                <div className="pt-3 border-t border-[#DCCBB8]/50 dark:border-[#3D2F2A] flex flex-wrap items-center justify-between gap-2 text-xs font-sans">
                   <div>
                     <div className="font-medium text-[#3E312D] dark:text-[#F5EFEB]">{rev.author}</div>
                     <div className="text-[11px] text-[#3E312D]/50 dark:text-[#C2B5AC]/60">{rev.location}</div>
@@ -154,17 +154,17 @@ export const WhatsAppPaymentGuide: React.FC = () => {
           </div>
         </div>
 
-        {/* Reassurance & FAQ Accordion */}
-        <div className="mt-16 bg-[#FAF7F3] dark:bg-[#1D1513] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded-2xl p-6 sm:p-10 transition-colors duration-200">
+        {/* Reassurance & FAQ */}
+        <div className="mt-12 sm:mt-16 bg-[#FAF7F3] dark:bg-[#1D1513] border border-[#DCCBB8] dark:border-[#3D2F2A] rounded-2xl p-5 sm:p-10 transition-colors duration-200">
           <div className="flex items-center gap-2.5 text-xs uppercase tracking-wider text-[#B98F77] dark:text-[#D4A388] font-sans font-semibold mb-3">
             <HelpCircle className="w-4 h-4" />
             <span>Frequently Asked Questions</span>
           </div>
-          <h3 className="font-serif text-2xl sm:text-3xl text-[#3E312D] dark:text-[#F5EFEB] font-normal mb-8">
+          <h3 className="font-serif text-2xl sm:text-3xl text-[#3E312D] dark:text-[#F5EFEB] font-normal mb-6 sm:mb-8">
             Why We Handle Orders via WhatsApp Concierge
           </h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-xs font-sans text-[#3E312D]/80 dark:text-[#C2B5AC]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 text-xs font-sans text-[#3E312D]/80 dark:text-[#C2B5AC]">
             <div className="space-y-2">
               <h4 className="font-medium text-[#3E312D] dark:text-[#F5EFEB] text-sm font-serif">
                 Is paying through WhatsApp safe?

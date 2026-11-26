@@ -1,16 +1,15 @@
 import React from 'react';
-import { MessageCircle, Sparkles } from 'lucide-react';
+import { MessageCircle, Sparkles, Lock } from 'lucide-react';
 import { getSellerWhatsAppNumber } from '../utils/whatsapp';
+import { ADMIN_HASH_ROUTE } from '../utils/adminAuth';
 
 interface FooterProps {
   onOpenConsultation: () => void;
-  onOpenSettings: () => void;
   onOpenAdmin: () => void;
 }
 
 export const Footer: React.FC<FooterProps> = ({
   onOpenConsultation,
-  onOpenSettings,
   onOpenAdmin,
 }) => {
   const sellerPhone = getSellerWhatsAppNumber();
@@ -23,11 +22,11 @@ export const Footer: React.FC<FooterProps> = ({
   };
 
   return (
-    <footer className="bg-[#3E312D] dark:bg-[#120C0A] text-[#F7F3EF] dark:text-[#EFE8DF] pt-16 pb-12 border-t border-[#DCCBB8]/30 dark:border-[#3D2F2A] font-sans transition-colors duration-200">
+    <footer className="bg-[#3E312D] dark:bg-[#120C0A] text-[#F7F3EF] dark:text-[#EFE8DF] pt-12 pb-10 sm:pt-16 sm:pb-12 border-t border-[#DCCBB8]/30 dark:border-[#3D2F2A] font-sans transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Top Footer Split */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-[#F7F3EF]/10 dark:border-[#3D2F2A]">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 sm:gap-10 pb-10 sm:pb-12 border-b border-[#F7F3EF]/10 dark:border-[#3D2F2A]">
           
           {/* Brand Info */}
           <div className="md:col-span-5 space-y-4">
@@ -89,11 +88,12 @@ export const Footer: React.FC<FooterProps> = ({
             </p>
 
             <button
+              type="button"
               onClick={handleGeneralWhatsApp}
-              className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#B98F77] dark:bg-[#C8977D] text-white hover:bg-[#a57a62] transition-colors rounded text-xs uppercase tracking-wider font-semibold cursor-pointer shadow-sm"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 bg-[#B98F77] dark:bg-[#C8977D] text-white hover:bg-[#a57a62] transition-colors rounded text-xs uppercase tracking-wider font-semibold cursor-pointer shadow-sm"
             >
-              <MessageCircle className="w-4 h-4" />
-              <span>Message Concierge (+{sellerPhone})</span>
+              <MessageCircle className="w-4 h-4 shrink-0" />
+              <span className="truncate">Message Concierge (+{sellerPhone})</span>
             </button>
 
             <div className="text-[11px] text-[#F7F3EF]/50 dark:text-[#C2B5AC]/50 pt-1">
@@ -104,13 +104,14 @@ export const Footer: React.FC<FooterProps> = ({
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F7F3EF]/50 dark:text-[#C2B5AC]/50">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#F7F3EF]/50 dark:text-[#C2B5AC]/50 text-center sm:text-left">
           <div>
             © {new Date().getFullYear()} MIREX SCENT. All Rights Reserved. Artisanal Haute Parfumerie.
           </div>
 
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center sm:justify-end gap-4 sm:gap-6">
             <button
+              type="button"
               onClick={onOpenConsultation}
               className="hover:text-[#F7F3EF] dark:hover:text-white transition-colors cursor-pointer"
             >
@@ -119,19 +120,18 @@ export const Footer: React.FC<FooterProps> = ({
             <a href="#how-it-works" className="hover:text-[#F7F3EF] dark:hover:text-white transition-colors">
               Payment Terms
             </a>
-            <button
-              onClick={onOpenSettings}
-              className="hover:text-[#F7F3EF] dark:hover:text-white transition-colors cursor-pointer"
+            <a
+              href={ADMIN_HASH_ROUTE}
+              onClick={(e) => {
+                e.preventDefault();
+                onOpenAdmin();
+              }}
+              className="text-[#F7F3EF]/40 dark:text-[#C2B5AC]/40 hover:text-[#F7F3EF]/80 dark:hover:text-[#F5EFEB] transition-colors cursor-pointer inline-flex items-center gap-1"
+              title="Staff portal access"
             >
-              Concierge Settings
-            </button>
-            <button
-              onClick={onOpenAdmin}
-              className="text-[#B98F77] dark:text-[#D4A388] hover:underline transition-colors cursor-pointer flex items-center gap-1 font-medium"
-            >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#B98F77] dark:bg-[#D4A388]" />
-              Admin Portal
-            </button>
+              <Lock className="w-3 h-3" />
+              <span>Atelier Access</span>
+            </a>
           </div>
         </div>
 
